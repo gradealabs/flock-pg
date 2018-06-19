@@ -10,8 +10,7 @@ test:
 .PHONY: build
 build:
 	@./node_modules/.bin/tsc -p .
-	@cp -R src/flock-cli/templates lib/flock-cli
-	@cp -R src/flock-pg/templates lib/flock-pg
+	@cp -R src/templates lib
 
 .PHONY: clean
 clean:
