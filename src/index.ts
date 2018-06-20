@@ -1,6 +1,6 @@
 import * as Path from 'path'
 import { Client } from 'pg'
-import * as Flock from 'flock'
+import * as Flock from '@gradealabs/flock'
 
 export class TemplateProvider implements Flock.TemplateProvider {
   readonly migrationTypes = [ 'create-table', 'alter-table', 'other' ]
@@ -26,12 +26,13 @@ export class DataAccessProvider implements Flock.DataAccessProvider {
   }
 
   async provide () {
-    const lock = 5432
+    const lock = 543222
     let locked = false
     const client = new Client({ connectionString: this.connectionString })
+    await client.connect()
 
     if (this.acquireLock) {
-      const advisoryLockResult = await client.query(`SELECT pg_try_advisory_lock(${lock})`)
+      const advisoryLockResult = await client.query({ text: `SELECT pg_try_advisory_lock(${lock})` })
       locked = advisoryLockResult.rows[0].pg_try_advisory_lock === true
 
       if (!locked) {
@@ -67,7 +68,8 @@ export class PgDataAccess implements Flock.DataAccess {
   }
 
   async migrate (migrationId: string, action: (qi: Flock.QueryInterface) => Promise<void>) {
-    const hasMigrated = await this.hasMigrated(migrationId)
+    const migrationTableExists = await this.qi.tableExists(this.migrationTableName)
+    const hasMigrated = migrationTableExists ? (await this.hasMigrated(migrationId)) : false
 
     if (hasMigrated) {
       return

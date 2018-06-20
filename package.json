@@ -17,6 +17,7 @@
   "author": "Darren Schnare <dschnare.d@gradealabs.com>",
   "license": "MIT",
   "devDependencies": {
+    "@gradealabs/flock": "github:gradealabs/flock#3.0.0",
     "@types/mocha": "5.2.2",
     "@types/node": "10.3.4",
     "@types/pg": "7.4.9",
