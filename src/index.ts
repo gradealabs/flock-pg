@@ -9,7 +9,10 @@ export class TemplateProvider implements Flock.TemplateProvider {
     if (this.migrationTypes.indexOf(migrationType) >= 0) {
       return Promise.resolve(Path.join(__dirname, 'templates', migrationType + '.ejs'))
     } else {
-      return Promise.reject(new Error(`Unsupported migration type [${migrationType}]`))
+      return Promise.reject(Object.assign(
+        new Error(`Unsupported migration type [${migrationType}]`),
+        { code: 'UNSUPPORTED_MIGRATION_TYPE' }
+      ))
     }
   }
 }

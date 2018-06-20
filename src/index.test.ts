@@ -1,5 +1,6 @@
 import * as Assert from 'assert'
-import { DataAccessProvider, PgDataAccess, PgQueryInterface } from './index'
+import * as Path from 'path'
+import { DataAccessProvider, PgDataAccess, PgQueryInterface, TemplateProvider } from './index'
 
 describe('flock-pg', function () {
   const dap = new DataAccessProvider()
@@ -16,6 +17,27 @@ describe('flock-pg', function () {
       text: `DROP TABLE IF EXISTS ${da.migrationTableName}`
     })
     await da.close()
+  })
+
+  describe('TemplateProvider', function () {
+    it('should provide a template file name when given a migration type that matches a template name', async function () {
+      const tp = new TemplateProvider()
+      let fileName = await tp.provideFileName('create-table')
+      Assert.strictEqual(fileName, Path.resolve(__dirname, './templates/create-table.ejs'))
+      fileName = await tp.provideFileName('alter-table')
+      Assert.strictEqual(fileName, Path.resolve(__dirname, './templates/alter-table.ejs'))
+      fileName = await tp.provideFileName('other')
+      Assert.strictEqual(fileName, Path.resolve(__dirname, './templates/other.ejs'))
+    })
+
+    it('should reject when given a migration type that does not match a template name', async function () {
+      const tp = new TemplateProvider()
+      try {
+        await tp.provideFileName('nope')
+      } catch (error) {
+        Assert.strictEqual(error.code, 'UNSUPPORTED_MIGRATION_TYPE')
+      }
+    })
   })
 
   describe('DataAccessProvider#provide', function () {
