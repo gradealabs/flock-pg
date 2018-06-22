@@ -28,8 +28,9 @@ exports.templateProvider = new TemplateProvider()
 
 ## Migrations
 
-When writing migrations that use `flock-pg` then the `QueryInterface#query`
-method signature is identical to that of the [pg](https://npmjs.org/pg)'s [Client#query](https://node-postgres.com/features/queries) method.
+When writing migrations that use `flock-pg` the `QueryInterface#query`
+method can be used in a similar fashion as the query method from the [pg](https://npmjs.org/pg)
+module.
 
 Example:
 ```js
@@ -37,6 +38,16 @@ exports.up = queryInterface => {
   const sql = 'QUERY'
   const values = [ 1, 2 ]
   return queryInterface.query({ text: sql, values })
+}
+```
+
+The `QueryInterface#query` method accepts a query object with the following shape:
+
+```ts
+{
+  text: string,
+  values?: any[],
+  name?: string
 }
 ```
 
