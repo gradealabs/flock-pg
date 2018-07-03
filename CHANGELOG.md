@@ -1,6 +1,13 @@
+# 0.0.3
+
+**Patch**
+
+- Resolve issue with rolling back without first migrating (i.e. the migration
+  table did not yet exist).
+
 # 0.0.2
 
-**Minor**
+**Patch**
 
 - Fix author email address in `package.json`.
 - Remove `tsconfig-paths` from `package.json`.

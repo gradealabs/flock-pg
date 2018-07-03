@@ -1,6 +1,6 @@
 {
   "name": "@gradealabs/flock-pg",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Flock plugin for Postgres",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
