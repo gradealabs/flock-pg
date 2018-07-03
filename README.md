@@ -41,7 +41,8 @@ exports.up = queryInterface => {
 }
 ```
 
-The `QueryInterface#query` method accepts a query object with the following shape:
+The `QueryInterface#query` method accepts anything that the `pg` query API accepts or a query object
+with the following shape:
 
 ```ts
 {
