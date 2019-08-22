@@ -17,7 +17,7 @@
   "author": "Darren Schnare <dschnare@gradealabs.com>",
   "license": "MIT",
   "devDependencies": {
-    "@gradealabs/flock": "github:launchfort/flock#3.2.0",
+    "@launchfort/flock": "github:launchfort/flock#3.2.3",
     "@types/mocha": "5.2.7",
     "@types/node": "12.7.2",
     "@types/pg": "7.11.0",
