@@ -3,6 +3,7 @@
 **Major**
 
 - Reach stability
+- Update scope to @launchfort from @gradealabs
 
 **Patch**
 
