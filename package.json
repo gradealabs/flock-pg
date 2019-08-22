@@ -1,5 +1,5 @@
 {
-  "name": "@gradealabs/flock-pg",
+  "name": "@launchfort/flock-pg",
   "version": "1.0.0",
   "description": "Flock plugin for Postgres",
   "main": "./lib/index.js",
