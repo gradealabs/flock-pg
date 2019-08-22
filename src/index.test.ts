@@ -13,6 +13,7 @@ describe('flock-pg', function () {
   })
 
   afterEach(async function () {
+    if (!qi) return
     qi.query({
       text: `DROP TABLE IF EXISTS ${da.migrationTableName}`
     })
